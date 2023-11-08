@@ -14,12 +14,15 @@ async function run() {
     const database = client.db("restaurant");
 
     const menuCollection = database.collection("menu");
+    const toppingCollection = database.collection("topping");
+    const fillingCollection = database.collection("filling");
+    await database.createCollection("order");
+
     const menuOption = { ordered: true };
     const menuResult = await menuCollection.insertMany(menu, menuOption);
     console.log("Seeding menu collection done");
 
     // Seeding koleksi "topping"
-    const toppingCollection = database.collection("topping");
     const toppingOption = { ordered: true };
     const toppingResult = await toppingCollection.insertMany(
       toppings,
@@ -28,7 +31,7 @@ async function run() {
     console.log("Seeding topping collection done");
 
     // Seeding koleksi "filling"
-    const fillingCollection = database.collection("filling");
+
     const fillingOption = { ordered: true };
     const fillingResult = await fillingCollection.insertMany(
       filling,
@@ -36,6 +39,7 @@ async function run() {
     );
 
     console.log("Seeding filling collection result done");
+
   } finally {
     await client.close();
   }

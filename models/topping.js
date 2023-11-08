@@ -14,6 +14,12 @@ class Topping {
       })
       .toArray();
   }
+
+  static async findByPk(id) {
+    return await this.toppings().findOne({
+      _id: new ObjectId(id),
+    });
+  }
 }
 
 module.exports = Topping;

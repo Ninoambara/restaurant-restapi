@@ -14,6 +14,12 @@ class Filling {
       })
       .toArray();
   }
+
+  static async findByPk(id) {
+    return await this.fillings().findOne({
+      _id: new ObjectId(id),
+    });
+  }
 }
 
 module.exports = Filling;

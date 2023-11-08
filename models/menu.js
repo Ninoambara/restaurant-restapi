@@ -13,7 +13,7 @@ class Menu {
 
   static async findByPK(id) {
     return await this.menus().findOne({
-      _id: new ObjectId(id),
+      _id: Number(id),
     });
   }
 }
