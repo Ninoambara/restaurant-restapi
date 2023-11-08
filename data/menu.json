@@ -1,0 +1,17 @@
+[
+  {
+    "_id": 1,
+    "name": "Pizza",
+    "price": 50000
+  },
+  {
+    "_id": 2,
+    "name": "doughnut",
+    "price": 20000
+  },
+  {
+    "_id": 3,
+    "name": "pie",
+    "price": 45000
+  }
+]

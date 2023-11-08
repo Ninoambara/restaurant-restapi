@@ -1,12 +1,12 @@
 require("dotenv").config();
-const { connect } = require("./config");
+const { connect, getDb } = require("./config");
 const express = require("express");
+const Menu = require("./models/Menu");
 const app = express();
 const port = process.env.PORT || 3000;
+const router = require("./routers/index");
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+app.use(router);
 
 connect().then((db) => {
   // console.log(db)

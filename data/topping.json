@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Cheese",
+    "menuId": 1,
+    "price": 12000
+  },
+  {
+    "name": "Chicken",
+    "menuId": 1,
+    "price": 18000
+  },
+  {
+    "name": "Pepper",
+    "menuId": 1,
+    "price": 8000
+  },
+  {
+    "name": "Blueberry",
+    "menuId": 2,
+    "price": 12000
+  },
+  {
+    "name": "Cheese",
+    "menuId": 2,
+    "price": 12000
+  },
+  {
+    "name": "Sugar Glaze",
+    "menuId": 2,
+    "price": 10000
+  },
+  {
+    "name": "Pepper",
+    "menuId": 3,
+    "price": 8000
+  },
+  {
+    "name": "Blueberry",
+    "menuId": 3,
+    "price": 12000
+  },
+  {
+    "name": "Apple Slices",
+    "menuId": 3,
+    "price": 14000
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Cheese",
+    "menuId": 1,
+    "price": 12000
+  },
+  {
+    "name": "Tomato",
+    "menuId": 1,
+    "price": 9000
+  },
+  {
+    "name": "Tuna",
+    "menuId": 1,
+    "price": 20000
+  },
+  {
+    "name": "Apple Slices",
+    "menuId": 2,
+    "price": 14000
+  },
+  {
+    "name": "Milk Cream",
+    "menuId": 2,
+    "price": 10000
+  },
+  {
+    "name": "Blueberry",
+    "menuId": 2,
+    "price": 12000
+  },
+  {
+    "name": "Tuna",
+    "menuId": 3,
+    "price": 20000
+  },
+  {
+    "name": "Cheese",
+    "menuId": 3,
+    "price": 12000
+  },
+  {
+    "name": "Chicken",
+    "menuId": 3,
+    "price": 18000
+  }
+]
