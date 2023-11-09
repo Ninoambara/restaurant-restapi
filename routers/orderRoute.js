@@ -4,5 +4,7 @@ const Controller = require("../controllers/controller")
 
 
 router.post("/", Controller.orderNew)
+router.get("/", Controller.fetchAllOrder)
+router.put("/checkout", Controller.checkoutOrder)
 
 module.exports = router

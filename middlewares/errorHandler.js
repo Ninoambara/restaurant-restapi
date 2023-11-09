@@ -17,12 +17,6 @@ function errorHandler(err, req, res, next) {
   } else if (err.name === "Failed Add New User") {
     status = 400;
     message = "Failed Add New User";
-  } else if (err.name === "Job not found") {
-    status = 404;
-    message = "Job not found";
-  } else if (err.name === "user not found") {
-    status = 400;
-    message = "user not found";
   }
 
   res.status(status).json({ message });

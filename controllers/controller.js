@@ -50,37 +50,109 @@ class Controller {
   static async orderNew(req, res) {
     try {
       const { id, filling, topping } = req.body;
+      let totalPrice = 0;
+      let selectedFilling;
+      let selectedTopping;
 
-      if (!id || !filling || !topping) {
+      if (!id) {
         return res.status(400).json({ error: "Invalid input data" });
       }
-      const selectedFilling = await Filling.findByPk(filling);
-      const selectedTopping = await Topping.findByPk(topping);
 
+      // Validasi filling
+      if (filling) {
+        selectedFilling = await Filling.findByPk(filling);
+
+        console.log(selectedFilling);
+
+        if (!selectedFilling) {
+          return res.status(400).json({ error: "Invalid filling selection" });
+        }
+
+        totalPrice += selectedFilling.price;
+      }
+
+      // Validasi topping
+      if (topping) {
+        const selectedTopping = await Topping.findByPk(topping);
+
+        if (!selectedTopping) {
+          return res.status(400).json({ error: "Invalid topping selection" });
+        }
+
+        totalPrice += selectedTopping.price;
+      }
 
       const menu = await Menu.findByPK(id);
       if (!menu) {
         return res.status(404).json({ error: "Menu Not Found" });
       } else if (
-        (menu && selectedFilling.menuId.toString() !== id.toString()) ||
-        selectedTopping.menuId.toString() !== id.toString()
+        (menu &&
+          selectedFilling &&
+          selectedFilling.menuId.toString() !== id.toString()) ||
+        (menu &&
+          selectedTopping &&
+          selectedTopping.menuId.toString() !== id.toString())
       ) {
         return res
           .status(400)
           .json({ error: "Invalid filling or topping for the selected menu" });
       } else {
+        totalPrice += menu.price;
         const orderData = {
           menuId: id,
-          filling: filling,
-          topping: topping,
+          filling: filling || null,
+          topping: topping || null,
+          status: false,
+          totalPrice: totalPrice,
+          userId: req.user.id,
         };
 
         const result = await Order.create(orderData);
 
-        res.json(result);
+        res.json({ message: `Your order of ${menu.name} success` });
       }
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  static async checkoutOrder(req, res) {
+    try {
+      const { orderId } = req.body;
+
+      if (!orderId) {
+        return res.status(400).json({ error: "Invalid input data" });
+      }
+
+      const order = await Order.findByPk(orderId);
+
+      if (!order) {
+        return res.status(404).json({ error: "Order not found" });
+      }
+
+      if (order.status) {
+        return res
+          .status(400)
+          .json({ error: "Order has already been checked out" });
+      }
+
+      await Order.updateStatus(orderId, true);
+
+      res.json({ message: "Order checked out successfully" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  }
+
+  static async fetchAllOrder(req, res) {
+    try {
+      const data = await Order.fetchAll()
+
+      res.json(data)
+
+    } catch (error) {
+      console.log(error)
     }
   }
 }

@@ -1,11 +1,11 @@
+require('dotenv').config();
 const { MongoClient } = require("mongodb");
 const menu = require("../data/menu.json");
 const toppings = require("../data/topping.json");
 const filling = require("../data/filling.json");
 // const uri =  "mongodb://127.0.0.1:27017";
-// const uri = //   your mongo url
-const uri =
-  "mongodb+srv://ninoambara:IeEZqELaecn8M4Le@cluster0.wg7pw1e.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp";
+const uri = process.env.MONGO_URL
+
 const client = new MongoClient(uri);
 
 async function run() {
