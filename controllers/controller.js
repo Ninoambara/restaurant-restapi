@@ -49,12 +49,12 @@ class Controller {
 
   static async orderNew(req, res) {
     try {
-      const { id, filling, topping } = req.body;
+      const { menuId, filling, topping } = req.body;
       let totalPrice = 0;
       let selectedFilling;
       let selectedTopping;
 
-      if (!id) {
+      if (!menuId) {
         return res.status(400).json({ error: "Invalid input data" });
       }
 
@@ -82,16 +82,16 @@ class Controller {
         totalPrice += selectedTopping.price;
       }
 
-      const menu = await Menu.findByPK(id);
+      const menu = await Menu.findByPK(menuId);
       if (!menu) {
         return res.status(404).json({ error: "Menu Not Found" });
       } else if (
         (menu &&
           selectedFilling &&
-          selectedFilling.menuId.toString() !== id.toString()) ||
+          selectedFilling.menuId.toString() !== menuId.toString()) ||
         (menu &&
           selectedTopping &&
-          selectedTopping.menuId.toString() !== id.toString())
+          selectedTopping.menuId.toString() !== menuId.toString())
       ) {
         return res
           .status(400)
@@ -99,7 +99,7 @@ class Controller {
       } else {
         totalPrice += menu.price;
         const orderData = {
-          menuId: id,
+          menuId: menuId,
           filling: filling || null,
           topping: topping || null,
           status: false,
